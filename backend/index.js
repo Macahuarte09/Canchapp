@@ -3,6 +3,7 @@ const cors = require('cors');
 require('dotenv').config();
 
 const canchasRoutes = require('./src/routes/canchas');
+const usuariosRoutes = require('./src/routes/usuarios');
 
 const app = express();
 
@@ -10,6 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/canchas', canchasRoutes);
+app.use('/api/usuarios', usuariosRoutes);
 
 const PORT = process.env.PORT || 3000;
 
