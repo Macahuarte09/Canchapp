@@ -4,6 +4,7 @@ require('dotenv').config();
 
 const canchasRoutes = require('./src/routes/canchas');
 const usuariosRoutes = require('./src/routes/usuarios');
+const reservasRoutes = require('./src/routes/reservas');
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(express.json());
 
 app.use('/api/canchas', canchasRoutes);
 app.use('/api/usuarios', usuariosRoutes);
+app.use('/api/reservas', reservasRoutes);
 
 const PORT = process.env.PORT || 3000;
 
