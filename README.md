@@ -24,7 +24,7 @@ Canchapp/
 │   │   ├── controllers/ ← lógica de cada endpoint
 │   │   ├── routes/      ← definición de las rutas
 │   │   └── db.js        ← conexión a MySQL
-│   ├── .env             ← variables de entorno (no se sube a GitHub)
+│   ├── .env             ← variables de entorno 
 │   ├── index.js         ← entrada principal del servidor
 │   └── package.json
 └── frontend/            ← próximamente
