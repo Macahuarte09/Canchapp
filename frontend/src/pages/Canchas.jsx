@@ -7,7 +7,7 @@ function Canchas() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/canchas')
+    axios.get('/api/canchas')
       .then((res) => setCanchas(res.data))
       .catch((err) => console.error(err));
   }, []);

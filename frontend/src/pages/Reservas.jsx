@@ -14,11 +14,11 @@ function Reservas() {
   const usuarioId = JSON.parse(atob(token.split('.')[1])).id;
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/canchas')
+    axios.get('/api/canchas')
       .then((res) => setCanchas(res.data))
       .catch((err) => console.error(err));
 
-    axios.get(`http://localhost:3000/api/reservas/usuario/${usuarioId}`)
+    axios.get(`/api/reservas/usuario/${usuarioId}`)
       .then((res) => setReservas(res.data))
       .catch((err) => console.error(err));
   }, []);
@@ -26,7 +26,7 @@ function Reservas() {
   const handleReserva = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:3000/api/reservas', {
+      await axios.post('/api/reservas', {
         usuario_id: usuarioId,
         cancha_id: canchaId,
         fecha,
@@ -41,7 +41,7 @@ function Reservas() {
 
   const handleCancelar = async (id) => {
     try {
-      await axios.put(`http://localhost:3000/api/reservas/cancelar/${id}`);
+      await axios.put(`/api/reservas/cancelar/${id}`);
       setReservas(reservas.map(r => r.id === id ? { ...r, estado: 'cancelada' } : r));
     } catch (err) {
       console.error(err);
