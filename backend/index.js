@@ -15,12 +15,8 @@ app.use('/api/canchas', canchasRoutes);
 app.use('/api/usuarios', usuariosRoutes);
 app.use('/api/reservas', reservasRoutes);
 
-const PORT = process.env.PORT || 3000;
-
 app.get('/', (req, res) => {
-  res.json({ mensaje: 'Bienvenidos a App de turnos de CANCHA' });
+res.json({ mensaje: 'Bienvenidos a App de turnos de CANCHA' });
 });
 
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en el puerto ${PORT}`);
-});
+module.exports = app;
