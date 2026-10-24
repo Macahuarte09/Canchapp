@@ -8,13 +8,14 @@ const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
 const [telefono, setTelefono] = useState('');
 const [error, setError] = useState('');
+
 const navigate = useNavigate();
 
 const handleRegister = async (e) => {
 e.preventDefault();
 setError('');
 
-```
+
 try {
   await axios.post(
     'https://canchaapp-158.vercel.app/api/usuarios/register',
@@ -33,13 +34,13 @@ try {
     'Error al registrarse, intentá de nuevo'
   );
 }
-```
+
 
 };
 
 return ( <div> <h2>Registrarse</h2>
 
-```
+
   {error && <p style={{ color: 'red' }}>{error}</p>}
 
   <form onSubmit={handleRegister}>
