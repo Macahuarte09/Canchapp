@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-require('dotenv').config();
 
 const canchasRoutes = require('./src/routes/canchas');
 const usuariosRoutes = require('./src/routes/usuarios');
@@ -8,7 +7,12 @@ const reservasRoutes = require('./src/routes/reservas');
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+origin: 'https://canchapp-blue.vercel.app',
+methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(express.json());
 
 app.use('/api/canchas', canchasRoutes);
