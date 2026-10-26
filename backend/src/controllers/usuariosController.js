@@ -34,7 +34,7 @@ const login = (req, res) => {
       if (!match) return res.status(401).json({ error: 'Contraseña incorrecta' });
 
       const token = jwt.sign(
-        { id: usuario.id, email: usuario.email },
+        { id: usuario.id, email: usuario.email,  nombre: usuario.nombre},
         process.env.JWT_SECRET,
         { expiresIn: '24h' }
       );
