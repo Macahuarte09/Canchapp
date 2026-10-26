@@ -11,7 +11,7 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res =  await axios.post('https://canchapp-158d.vercel.app/api/usuarios/login', { email, password });
+      const res =  await axios.post('https://canchapp-158.vercel.app/api/usuarios/login', { email, password });
       localStorage.setItem('token', res.data.token);
       navigate('/canchas');
     } catch (err) {
