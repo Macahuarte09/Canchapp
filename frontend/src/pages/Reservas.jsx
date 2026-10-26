@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const API = 'https://canchapp-158d.vercel.app/api';
 
@@ -13,9 +13,10 @@ function getUsuarioId(token) {
 }
 
 function Reservas() {
+  const location = useLocation();
   const [canchas, setCanchas] = useState([]);
   const [reservas, setReservas] = useState([]);
-  const [canchaId, setCanchaId] = useState('');
+  const [canchaId, setCanchaId] = useState(location.state?.canchaId ?? '');
   const [fecha, setFecha] = useState('');
   const [horaInicio, setHoraInicio] = useState('');
   const [horaFin, setHoraFin] = useState('');
