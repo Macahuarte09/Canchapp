@@ -18,7 +18,7 @@ setError('');
 
 try {
   await axios.post(
-    'https://canchaapp-158.vercel.app/api/usuarios/register',
+    'https://canchapp-158.vercel.app/api/usuarios/register',
     { nombre, email, password, telefono }
   );
 
