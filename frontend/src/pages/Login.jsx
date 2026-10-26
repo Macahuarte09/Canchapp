@@ -23,7 +23,7 @@ function Login() {
   return (
     <div className="auth-wrap">
       <div className="auth-brand">
-        <h1>CanchApp</h1>
+        <h1>Bienvenidos. Reservá tu cancha de pádel o pelota paleta</h1>
         <p>Reservá tu cancha de pádel o pelota paleta.</p>
       </div>
       <div className="auth-card">
