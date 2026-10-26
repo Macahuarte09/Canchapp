@@ -7,7 +7,7 @@ function Canchas() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('/api/canchas')
+    axios.get(axios.get('https://canchapp-158d.vercel.app/api/canchas'))
       .then((res) => setCanchas(res.data))
       .catch((err) => console.error(err));
   }, []);
