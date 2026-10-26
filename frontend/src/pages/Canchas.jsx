@@ -21,7 +21,7 @@ function Canchas() {
           <h3>{cancha.nombre}</h3>
           <p>Tipo: {cancha.tipo}</p>
           <p>Precio por hora: ${cancha.precio_por_hora}</p>
-          <button onClick={() => navigate('/reservas', { state: { canchaId: cancha.id } })}>
+          <button onClick={() => navigate('/reservar', { state: { canchaId: cancha.id } })}>
             Reservar
           </button>
         </div>

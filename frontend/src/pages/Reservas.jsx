@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const API = 'https://canchapp-158d.vercel.app/api';
 
@@ -13,55 +13,21 @@ function getUsuarioId(token) {
 }
 
 function Reservas() {
-  const location = useLocation();
-  const [canchas, setCanchas] = useState([]);
   const [reservas, setReservas] = useState([]);
-  const [canchaId, setCanchaId] = useState(location.state?.canchaId ?? '');
-  const [fecha, setFecha] = useState('');
-  const [horaInicio, setHoraInicio] = useState('');
-  const [horaFin, setHoraFin] = useState('');
-  const [mensaje, setMensaje] = useState('');
-  const [esError, setEsError] = useState(false);
   const navigate = useNavigate();
 
   const token = localStorage.getItem('token');
   const usuarioId = token ? getUsuarioId(token) : null;
-
-  const cargarReservas = useCallback(() => {
-    axios.get(`${API}/reservas/usuario/${usuarioId}`)
-      .then((res) => setReservas(res.data))
-      .catch((err) => console.error(err));
-  }, [usuarioId]);
 
   useEffect(() => {
     if (!usuarioId) {
       navigate('/');
       return;
     }
-    axios.get(`${API}/canchas`)
-      .then((res) => setCanchas(res.data))
+    axios.get(`${API}/reservas/usuario/${usuarioId}`)
+      .then((res) => setReservas(res.data))
       .catch((err) => console.error(err));
-    cargarReservas();
-  }, [usuarioId, navigate, cargarReservas]);
-
-  const handleReserva = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post(`${API}/reservas`, {
-        usuario_id: usuarioId,
-        cancha_id: canchaId,
-        fecha,
-        hora_inicio: horaInicio,
-        hora_fin: horaFin
-      });
-      setEsError(false);
-      setMensaje('Reserva creada exitosamente!');
-      cargarReservas();
-    } catch (err) {
-      setEsError(true);
-      setMensaje(err.response?.data?.error || 'Error al crear la reserva');
-    }
-  };
+  }, [usuarioId, navigate]);
 
   const handleCancelar = async (id) => {
     try {
@@ -76,22 +42,8 @@ function Reservas() {
 
   return (
     <div>
-      <h2>Hacer una reserva</h2>
-      {mensaje && <p style={{ color: esError ? 'red' : 'green' }}>{mensaje}</p>}
-      <form onSubmit={handleReserva}>
-        <select value={canchaId} onChange={(e) => setCanchaId(e.target.value)} required>
-          <option value="">Elegí una cancha</option>
-          {canchas.map((c) => (
-            <option key={c.id} value={c.id}>{c.nombre} - ${c.precio_por_hora}/hora</option>
-          ))}
-        </select>
-        <input type="date" value={fecha} onChange={(e) => setFecha(e.target.value)} required />
-        <input type="time" value={horaInicio} onChange={(e) => setHoraInicio(e.target.value)} required />
-        <input type="time" value={horaFin} onChange={(e) => setHoraFin(e.target.value)} required />
-        <button type="submit">Reservar</button>
-      </form>
-
       <h2>Mis reservas</h2>
+      <button onClick={() => navigate('/canchas')}>Volver</button>
       {reservas.length === 0 && <p>No tenés reservas todavía.</p>}
       {reservas.map((r) => (
         <div key={r.id}>
