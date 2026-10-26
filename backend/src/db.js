@@ -8,17 +8,10 @@ const pool = mysql.createPool({
   database: process.env.DB_NAME,
   port: process.env.DB_PORT,
   waitForConnections: true,
-  connectionLimit: 2,
+  connectionLimit: 1,
+  maxIdle: 1,
+  idleTimeout: 10000,
   queueLimit: 0
-});
-
-pool.getConnection((err, connection) => {
-  if (err) {
-    console.error('Error al conectar a la base de datos:', err);
-    return;
-  }
-  console.log('Conectado a MySQL correctamente');
-  connection.release();
 });
 
 module.exports = pool;
